@@ -5,13 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File with Arguments",
+            "name": "Warp visualization debug",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/infer_warpvis.py",
             "console": "integratedTerminal",
             "args": [
                 "raft",
+                //"--input_path", "datasets_realvideo/DAVIS_SAMPLE",
+                "--input_path", "datasets_realvideo/SINTEL_SAMPLE",
+                //"--input_path", "datasets_realvideo/KITTI_SAMPLE/test114",
+                "--write_outputs",
+                "--output_path", "results/warpvis_debug1",
+                "--flow_format", "flo",
+                "--pretrained_ckpt", "sintel",
+                //"--pretrained_ckpt", "kitti",
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            }
+        },
+        {
+            "name": "IRR-PWC inference saving jank",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/infer.py",
+            "console": "integratedTerminal",
+            "args": [
+                "irr_pwc",
                 "--input_path", "datasets_realvideo/DAVIS_SAMPLE",
                 "--write_outputs",
                 "--output_path", "results/warpvis_debug",
@@ -20,7 +41,26 @@
                 "--pretrained_ckpt", "sintel",
             ],
             "env": {
-                "CUDA_VISIBLE_DEVICES": "0"
+                "CUDA_VISIBLE_DEVICES": "1"
+            }
+        },
+        {
+            "name": "IRR-PWC inference saving jank fix",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/infer_irrocc.py",
+            "console": "integratedTerminal",
+            "args": [
+                "irr_pwc",
+                "--input_path", "datasets_realvideo/DAVIS_SAMPLE",
+                "--write_outputs",
+                "--output_path", "results/inferoccs_debug",
+                "--flow_format", "flo",
+                "--fp16",
+                "--pretrained_ckpt", "sintel",
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1"
             }
         }
     ]
